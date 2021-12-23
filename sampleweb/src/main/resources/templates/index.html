@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<link href="/css/reset.css" th:href="@{/css/reset.css}" rel="stylesheet" />
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+
+<title>Sample Web</title>
+</head>
+<body>
+
+<header th:insert="fragments/page_header::pageHeader"></header>
+
+<main>
+	<div class="container">
+		<table class="top" id="mstProductListTable">
+			<tr>
+				<th>画像</th><th>商品名</th><th>価格(円)</th><th>個数</th><th>カート</th>
+			</tr>
+<!-- 			Mock Start -->
+			<tr th:each="item:${mstProductList}">
+				<td class="image"><img class="itemImage" th:src="${item.imageFullPath}" /></td>
+				<td th:text="${item.productName}" /> 
+				<td class="number" th:text="${item.price}" />
+				<td class="componentTd"><input type="number" id="productCount" class="count number" value="0" min="0"/>
+										<input type="hidden" id="productId" th:value="${item.id}"/></td>
+				<td class="componentTd"><button id="cartButton">追加</button></td>
+			</tr >
+<!-- 			Mock End -->
+		</table>	
+	</div>
+</main>
+
+<script>
+$(() => {
+	$('button#cartButton').on('click', (event) => {
+		let targetTr = $(event.target).parent().parent();
+		let productId = $(targetTr).find('#productId').val();
+		let productCount = $(targetTr).find('#productCount').val();
+		addCart(productId,productCount);
+	});
+});
+</script > 
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<link href="/css/reset.css" th:href="@{/css/reset.css}" rel="stylesheet" />
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+
+<title>Sample Web</title>
+</head>
+<body>
+
+<header th:insert="fragments/page_header::pageHeader"></header>
+
+<main>
+	<div class="container cart">
+		<div>
+			<h2>宛先を選択し、決済を完了します。</h2>
+		</div>
+		<table class="destination">
+			<tr>
+				<th>選択</th><th>宛先氏名</th><th>住所</th><th>電話番号</th>
+			</tr>
+			<tr th:each="item, st: ${mstDestinationList}">
+				<td><input type="radio" class="radioButton" th:checked="${st.index==0}" th:value="${item.id}" /></td>
+				<td th:text="${item.familyName + ' ' + item.firstName}" />
+				<td th:text="${item.address}" />
+				<td th:text="${item.telNumber}" />
+			</tr >
+		</table>
+		<div class="buttonArea">
+				<button id="settlementButton">決済</button >
+		</div>	
+	</div>
+</main>
+
+<script>
+$(() => {
+	$('#settlementButton').on('click',() => {
+		let checked = $('.radioButton:checked');
+		let destinationId = $(checked).val();
+		settlement(destinationId);
+	});
+});
+</script>
+
+</body>
+</html>

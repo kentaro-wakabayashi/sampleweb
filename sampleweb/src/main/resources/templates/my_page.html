@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<link href="/css/reset.css" th:href="@{/css/reset.css}" rel="stylesheet" />
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+
+<title>Sample Web</title>
+</head>
+<body>
+
+<header th:insert="fragments/page_header::pageHeader"></header>
+
+<main>
+	<div class="container myPage">
+		<div>
+			<h2>マイページ</h2>
+		</div>
+		<table class="mypageList" th:each="item:${userData}">
+			<tr>
+				<th>氏名</th><td th:text="${item.familyName + ' ' + item.firstName}" />
+			</tr>
+			<tr>
+				<th>氏名ふりがな</th><td th:text="${item.familyNameKana + ' ' + item.firstNameKana}" />
+			</tr>
+			<tr>
+				<th>性別</th><td th:text="${item.gender == 0}? '男性' : '女性' " />
+			</tr>
+			<tr>
+				<th>ユーザー名　<br> （メールアドレス）</th><td th:text="${item.userName}" />
+			</tr>
+			<tr>
+				<th>パスワード</th><td th:text="${item.password}" />
+			</tr>
+		</table>
+		<div class="buttonArea" th:if="${userData != null }">
+			<button id="transitionSettlement">購入履歴</button >
+		</div>
+	</div>
+</main>
+
+<script>
+	$(() => {
+		$('#transitionSettlement').on('click',() => {
+			location.replace("/sampleweb/history/");
+		});
+	});
+</script>
+
+</body>
+</html>

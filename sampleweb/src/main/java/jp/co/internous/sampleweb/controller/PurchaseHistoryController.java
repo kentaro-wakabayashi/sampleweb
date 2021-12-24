@@ -38,7 +38,9 @@ public class PurchaseHistoryController {
 		
 		List<PurchaseHistoryDto> purchaseHistoryDtoList = tblPurchaseHistoryMapper.findByUserId(userId);
 		
-		m.addAttribute("purchaseHistoryDtoList", purchaseHistoryDtoList);
+		if(purchaseHistoryDtoList != null && purchaseHistoryDtoList.size() > 0) {
+			m.addAttribute("purchaseHistoryDtoList", purchaseHistoryDtoList);
+		}
 		
 		//page_header.htmlでセッションデータを表示させるため画面に送る処理
 		m.addAttribute("loginSession", loginSession);

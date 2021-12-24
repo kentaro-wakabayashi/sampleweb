@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import jp.co.internous.sampleweb.model.domain.dto.MstUser;
+import jp.co.internous.sampleweb.model.domain.MstUser;
 import jp.co.internous.sampleweb.model.form.UserForm;
 import jp.co.internous.sampleweb.model.mapper.MstUserMapper;
 import jp.co.internous.sampleweb.model.mapper.TblCartMapper;

@@ -2,29 +2,29 @@
 <!DOCTYPE mapper
  PUBLIC "-mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.internous.sampleweb.model.mapper.TblPurchaseHistoryMapper">
- 	<select id="findByUserId" resultType="jp.co.internous.sampleweb.model.domain.dto.PurchaseHistoryDto">
- 		SELECT 
- 			DATE_FORMAT(h.purchased_at, '%Y/%m/%d %T') AS purchased_at,
- 			p.product_name, 
- 			h.price, h.product_count, 
- 			d.family_name, 
- 			d.first_name, 
- 			d.address
- 		FROM tbl_purchase_history h
- 			INNER JOIN 
- 				mst_product p
- 			ON 
- 				h.product_id = p.id
- 			INNER JOIN 
- 				mst_destination d
- 			ON 
- 				h.destination_id = d.id
- 		WHERE 
- 			h.user_id = #{userId} AND h.status = 1
- 		ORDER BY 
- 			h.purchased_at desc
-  	</select>
-  	<!-- for文を使わずに購入履歴情報を登録する
+	<select id="findByUserId" resultType="jp.co.internous.sampleweb.model.domain.dto.PurchaseHistoryDto">
+		SELECT 
+			DATE_FORMAT(h.purchased_at, '%Y/%m/%d %T') AS purchased_at,
+			p.product_name, 
+			h.price, h.product_count, 
+			d.family_name, 
+			d.first_name, 
+			d.address
+		FROM tbl_purchase_history h
+			INNER JOIN 
+				mst_product p
+			ON 
+				h.product_id = p.id
+			INNER JOIN 
+				mst_destination d
+			ON 
+				h.destination_id = d.id
+		WHERE 
+			h.user_id = #{userId} AND h.status = 1
+		ORDER BY 
+			h.purchased_at desc
+	</select>
+	<!--for文を使わずに購入履歴情報を登録する
 	<insert id="insert" useGeneratedKeys="true" parameterType="hashmap">
 		INSERT INTO tbl_purchase_history
 			(user_id, product_id, product_count, price, destination_id)
@@ -39,6 +39,6 @@
 		WHERE
 			 cart.user_id = #{userId};
 
-	</insert>
-	-->
+	</insert> -->
+
 </mapper>

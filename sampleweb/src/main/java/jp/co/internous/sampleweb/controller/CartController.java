@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import jp.co.internous.sampleweb.model.domain.TblCart;
 import jp.co.internous.sampleweb.model.domain.dto.CartDto;
-import jp.co.internous.sampleweb.model.domain.dto.TblCart;
 import jp.co.internous.sampleweb.model.form.CartForm;
 import jp.co.internous.sampleweb.model.mapper.TblCartMapper;
 import jp.co.internous.sampleweb.model.session.LoginSession;
@@ -71,16 +71,15 @@ public class CartController {
 		
 		//カートテーブルに商品を挿入または更新
 		TblCart c = new TblCart(f);
-		Integer updateId = tblCartMapper.selectId(userId, f.getProductId());
-		Integer maxId = tblCartMapper.maxId();
-		if(updateId != null && updateId > 0) {
-			c.setId(updateId);
-		}else if(maxId != null && maxId > 0) {
-			c.setId(maxId + 1);
+		
+		int id = tblCartMapper.selectIdByUserIdAndProductId(userId, f.getProductId());
+		
+		if(id>0) {
+			c.setId(id);
 		}else {
-			c.setId(1);
+			c.setId(tblCartMapper.selectMaxId());
 		}
-		tblCartMapper.insert(c);
+		tblCartMapper.insertAndUpdate(c);
 		
 		List<CartDto> cartDtoList = tblCartMapper.findCart(userId);
 		if(cartDtoList != null && cartDtoList.size() > 0) {
@@ -91,7 +90,7 @@ public class CartController {
 		m.addAttribute("loginSession", loginSession);
 		
 		return "cart";
-		}
+	}
 	
 	/**
 	 * カート情報を削除する

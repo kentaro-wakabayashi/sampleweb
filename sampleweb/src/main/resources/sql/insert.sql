@@ -3,11 +3,6 @@ SET foreign_key_checks=1;
 USE shopdb;
 
 INSERT INTO mst_user(user_name,password,family_name,first_name,family_name_kana,first_name_kana,gender) VALUES ("yamada@gmail.com","123","山田","太郎","やまだ","たろう",0);
-INSERT INTO mst_user(user_name,password,family_name,first_name,family_name_kana,first_name_kana,gender) VALUES ("hanako@yahoo.co.jp","123","田中","花子","たなか","はなこ",1);
-
-INSERT INTO mst_destination(user_id,family_name,first_name,tel_number,address) VALUES (1,"山田","太郎","08011112222","埼玉県所沢市小手指町1-1-1");
-INSERT INTO mst_destination(user_id,family_name,first_name,tel_number,address) VALUES (2,"田中","花子","07033334444","東京都小平市回田町2-2-2");
-INSERT INTO mst_destination(user_id,family_name,first_name,tel_number,address) VALUES (1,"山田","次郎","08012345678","埼玉県所沢市小手指町1-1-1");
 
 INSERT INTO mst_category (category_name,category_description)VALUES("1月開花","1月開花の植物のカテゴリーです");
 INSERT INTO mst_category (category_name,category_description)VALUES("2月開花","2月開花の植物のカテゴリーです");

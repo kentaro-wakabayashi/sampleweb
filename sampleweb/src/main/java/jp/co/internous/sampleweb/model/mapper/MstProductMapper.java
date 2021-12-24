@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import jp.co.internous.sampleweb.model.domain.dto.MstProduct;
+import jp.co.internous.sampleweb.model.domain.MstProduct;
 
 /**
  * mst_productにアクセスするDAO

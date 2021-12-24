@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import jp.co.internous.sampleweb.model.domain.dto.MstDestination;
+import jp.co.internous.sampleweb.model.domain.MstDestination;
 
 /**
  * mst_destinationにアクセスするDAO

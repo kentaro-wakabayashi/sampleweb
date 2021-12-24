@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
  PUBLIC "-mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="jp.co.internous.sampleweb.model.mapper.TblCartMapper">
- 	<select id="findCart" resultType="jp.co.internous.sampleweb.model.domain.dto.CartDto">
- 		SELECT 
- 			t.id,
- 			t.product_id, 
- 			m.image_full_path, 
- 			m.product_name, 
- 			m.price, 
- 			t.product_count,
- 			(m.price * t.product_count) subTotal
- 		FROM tbl_cart t
- 			INNER JOIN 
- 				mst_product m
- 			ON 
- 				t.product_id = m.id
- 		WHERE 
- 			t.user_id = #{userId} 
- 		ORDER BY 
- 			t.created_at desc, t.updated_at desc
- 	</select>
- 	<delete id="deleteById">
+<mapper namespace="jp.co.internous.sampleweb.model.mapper.TblCartMapper">
+	<select id="findCart" resultType="jp.co.internous.sampleweb.model.domain.dto.CartDto">
+		SELECT 
+			t.id,
+			t.product_id, 
+			m.image_full_path, 
+			m.product_name, 
+			m.price, 
+			t.product_count,
+			(m.price * t.product_count) subTotal
+		FROM tbl_cart t
+			INNER JOIN 
+				mst_product m
+				 			ON 
+				t.product_id = m.id
+		WHERE 
+			t.user_id = #{userId} 
+		ORDER BY 
+			t.created_at desc, t.updated_at desc
+	</select>
+	<delete id="deleteById">
 		DELETE
 		FROM tbl_cart
 		WHERE id IN 
@@ -29,4 +29,4 @@
 			#{checkedId}
 		</foreach>
 	</delete>
- </mapper>
+</mapper>

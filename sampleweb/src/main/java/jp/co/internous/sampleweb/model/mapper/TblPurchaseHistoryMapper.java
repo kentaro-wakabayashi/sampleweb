@@ -1,6 +1,7 @@
 package jp.co.internous.sampleweb.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,7 +26,7 @@ public interface TblPurchaseHistoryMapper {
 	 * @param price 価格
 	 * @param destinationId 宛先ID
 	 * @return 件数
-	 */
+	 */	
 	@Insert("INSERT INTO tbl_purchase_history (user_id,product_id,product_count,price,destination_id)" +
 			"VALUES (#{userId},#{productId},#{productCount},#{price},#{destinationId})")
 	int insert(@Param("userId") int userId,
@@ -38,9 +39,8 @@ public interface TblPurchaseHistoryMapper {
 	 * （for文を使わずに）
 	 * 購入履歴情報を登録する
 	 * @param parameter パラメーター(ユーザーID、宛先情報ID)
-	 * @return 登録件数
-	 * int insert(Map<String, Object> parameter);
-	*/
+	 * @return 登録件数*/
+//	int insert(Map<String, Object> parameter);
 	
 	/**
 	 * ユーザーIDを条件に購入履歴を取得する

@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import jp.co.internous.sampleweb.model.domain.TblCart;
 import jp.co.internous.sampleweb.model.domain.dto.CartDto;
-import jp.co.internous.sampleweb.model.domain.dto.TblCart;
 
 /**
  * tbl_cartにアクセスするDAO
@@ -31,18 +31,18 @@ public interface TblCartMapper {
 	 * ユーザーIDと商品IDを条件に主キーを取得する
 	 * @param userId ユーザーID
 	 * @Param productId 商品ID　
-	 * @return 主キー
+	 * @return 主キー,idが存在しない場合は0
 	 */
-	@Select("SELECT id FROM tbl_cart WHERE user_id = #{userId} AND product_id = #{productId}")
-	Integer selectId(@Param("userId") int userId,
-					 @Param("productId") int productId);
+	@Select("SELECT IF(count(id)>0, id, 0) FROM tbl_cart WHERE user_id = #{userId} AND product_id = #{productId}")
+	int selectIdByUserIdAndProductId(@Param("userId") int userId,
+										@Param("productId") int productId);
 	
 	/**
-	 * 主キーの最大値を取得する
-	 * @return 主キー 
+	 * 主キーの最大値 + 1 を取得する
+	 * @return 主キー + 1, 存在しない場合は1 
 	 */
-	@Select("SELECT MAX(id) FROM tbl_cart")
-	Integer maxId();
+	@Select("SELECT IF(count(id)>0, MAX(id)+1, 1) FROM tbl_cart")
+	int selectMaxId();
 	
 	/**
 	 * ユーザーIDを条件に件数を取得する
@@ -64,12 +64,12 @@ public interface TblCartMapper {
 	/**
 	 * カート情報を登録する
 	 * @param tblCart カート情報
-	 * @return 無し
+	 * @return なし
 	 */
 	@Insert("INSERT INTO tbl_cart (id, user_id, product_id, product_count) " +
 			"VALUES (#{id}, #{userId}, #{productId}, #{productCount})" +
 			"ON DUPLICATE KEY UPDATE product_count = product_count + #{productCount}")
-	void insert(TblCart tblCart);
+	void insertAndUpdate(TblCart tblCart);
 	
 	/**
 	 * ユーザーIDを条件にカート情報を削除する

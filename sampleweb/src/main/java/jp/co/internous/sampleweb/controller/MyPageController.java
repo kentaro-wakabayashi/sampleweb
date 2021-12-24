@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.internous.sampleweb.model.domain.dto.MstUser;
+import jp.co.internous.sampleweb.model.domain.MstUser;
 import jp.co.internous.sampleweb.model.mapper.MstUserMapper;
 import jp.co.internous.sampleweb.model.session.LoginSession;
 
@@ -43,8 +43,9 @@ public class MyPageController {
 			int count = userData.getPassword().length();
 			String password = String.join("", Collections.nCopies(count, "*"));
 			userData.setPassword(password);
+			m.addAttribute("userData", userData);
 		}
-		m.addAttribute("userData", userData);
+		
 		
 		//page_header.htmlでセッションデータを表示させるため画面に送る処理
 		m.addAttribute("loginSession", loginSession);

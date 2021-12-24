@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.internous.sampleweb.model.domain.dto.MstProduct;
+import jp.co.internous.sampleweb.model.domain.MstProduct;
 import jp.co.internous.sampleweb.model.mapper.MstProductMapper;
 import jp.co.internous.sampleweb.model.session.LoginSession;
 

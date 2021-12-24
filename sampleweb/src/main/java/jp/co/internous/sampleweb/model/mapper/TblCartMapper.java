@@ -62,14 +62,14 @@ public interface TblCartMapper {
 	int updateUserId(@Param("userId") int userId, @Param("tmpUserId") int tmpUserId);
 	
 	/**
-	 * カート情報を登録する
+	 * カート情報を登録または更新する
 	 * @param tblCart カート情報
 	 * @return なし
 	 */
 	@Insert("INSERT INTO tbl_cart (id, user_id, product_id, product_count) " +
 			"VALUES (#{id}, #{userId}, #{productId}, #{productCount})" +
-			"ON DUPLICATE KEY UPDATE product_count = product_count + #{productCount}")
-	void insertAndUpdate(TblCart tblCart);
+			"ON DUPLICATE KEY UPDATE product_count = product_count + #{productCount},updated_at = now()")
+	void insertOrUpdate(TblCart tblCart);
 	
 	/**
 	 * ユーザーIDを条件にカート情報を削除する

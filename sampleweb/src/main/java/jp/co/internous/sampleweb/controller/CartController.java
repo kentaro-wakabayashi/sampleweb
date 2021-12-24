@@ -79,7 +79,7 @@ public class CartController {
 		}else {
 			c.setId(tblCartMapper.selectMaxId());
 		}
-		tblCartMapper.insertAndUpdate(c);
+		tblCartMapper.insertOrUpdate(c);
 		
 		List<CartDto> cartDtoList = tblCartMapper.findCart(userId);
 		if(cartDtoList != null && cartDtoList.size() > 0) {
